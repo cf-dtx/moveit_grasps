@@ -35,24 +35,22 @@ Clone this repository into a catkin workspace, then use the rosdep install tool 
 
 Melodic (Ubuntu 18.04):
 
-1. Re-use or create a catkin workspace:
+Due to,
+- https://github.com/ros-planning/moveit_grasps/issues/92
+- https://github.com/ros-planning/moveit_visual_tools/issues/61
 
-        export CATKIN_WS=~/ws_catkin/
-        mkdir -p $CATKIN_WS/src
-        cd $CATKIN_WS/src
+The installation procedure is the following,
 
 1. Download the required repositories and install any dependencies:
 
-        git clone git@github.com:ros-planning/moveit_grasps.git
-        wstool init .
-        wstool merge moveit_grasps/moveit_grasps.rosinstall
-        wstool update
+        git clone https://github.com/PickNikRobotics/rviz_visual_tools.git -b master
+        git clone https://github.com/ros-planning/moveit_visual_tools.git -b melodic-devel
+        git clone https://github.com/ros-planning/moveit_msgs -b master
+        rosdep update
         rosdep install --from-paths . --ignore-src --rosdistro melodic
 
 1. Configure and build the workspace:
 
-        cd $CATKIN_WS
-        catkin config --extend /opt/ros/melodic --cmake-args -DCMAKE_BUILD_TYPE=Release
         catkin build
 
 1. Source the workspace.
